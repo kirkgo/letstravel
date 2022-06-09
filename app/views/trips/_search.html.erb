@@ -1,0 +1,10 @@
+<%= form_tag trips_path, :method => 'get' do %>
+  <p>
+    <%= select_tag :departure, options_from_collection_for_select(City.all, :id, :name),
+      { :prompt => 'Select departure'}  %>
+    <%= select_tag :arrival, options_from_collection_for_select(City.all, :id, :name),
+      { :prompt => 'Select arrival'}  %>
+    <%= datetime_field_tag :departure_date %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %>

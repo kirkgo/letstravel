@@ -36,3 +36,9 @@ p "Creating cities..."
   city = FactoryBot.build(:city)
   city.save if city.valid?
 end
+
+p "Creating trips..."
+4.times do
+  trip = FactoryBot.build(:trip)
+  trip.save if trip.valid?
+end

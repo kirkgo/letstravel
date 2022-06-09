@@ -1,4 +1,6 @@
 class Bus < ApplicationRecord
+  has_many :trips
+
   validates :bus_code, presence: true
   validates :bus_code, length: { minimum: 8, maxium: 8 }
   validates :seats, presence: true
