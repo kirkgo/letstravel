@@ -6,3 +6,26 @@ p "Creating buses..."
   bus = FactoryBot.build(:bus)
   bus.save if bus.valid?
 end
+
+p "Creating users..."
+User.destroy_all
+User.create!(
+  [
+    {
+      email: "user01@example.com",
+      password: "123456",
+      password_confirmation: "123456"
+    },
+    {
+      email: "user02@example.com",
+      password: "123456",
+      password_confirmation: "123456"
+    }
+  ]
+)
+
+# p "Creating users..."
+# 4.times do
+#   user = FactoryBot.build(:user)
+#   user.save if user.valid?
+# end
