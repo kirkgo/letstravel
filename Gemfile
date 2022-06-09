@@ -29,6 +29,9 @@ gem 'jbuilder', '~> 2.7'
 gem 'factory_bot_rails'
 gem 'faker'
 
+# Devise
+gem 'devise'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
 
