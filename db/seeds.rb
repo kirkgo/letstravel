@@ -29,3 +29,10 @@ User.create!(
 #   user = FactoryBot.build(:user)
 #   user.save if user.valid?
 # end
+
+p "Initializing seeds..."
+p "Creating cities..."
+10.times do
+  city = FactoryBot.build(:city)
+  city.save if city.valid?
+end
