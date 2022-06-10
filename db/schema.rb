@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_074524) do
+ActiveRecord::Schema.define(version: 2022_06_10_083545) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "passenger_id", null: false
@@ -38,6 +38,17 @@ ActiveRecord::Schema.define(version: 2022_06_10_074524) do
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "credit_cards", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "cardholder"
+    t.string "number"
+    t.string "expire_date"
+    t.string "cvv"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_credit_cards_on_user_id"
   end
 
   create_table "passengers", force: :cascade do |t|
@@ -75,6 +86,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_074524) do
 
   add_foreign_key "bookings", "passengers"
   add_foreign_key "bookings", "trips"
+  add_foreign_key "credit_cards", "users"
   add_foreign_key "passengers", "users"
   add_foreign_key "trips", "buses"
   add_foreign_key "trips", "cities", column: "arrival_id"
