@@ -4,10 +4,9 @@ class Booking < ApplicationRecord
   accepts_nested_attributes_for :passenger
 
   validates :trip_id, presence: true
-  validates :passenger_id, presence: true
   validate :one_per_trip_and_passenger
 
-  enum status: %i[new confirmed cancelled]
+  enum status: %i[new confirmed cancelled], _prefix: :status
 
   def one_per_trip_and_passenger
     if Booking.where(passenger_id: passenger_id, trip_id: trip_id).exists?

@@ -1,0 +1,72 @@
+<h1>New Booking</h1>
+<p>Please, confirm your booking info below.</p>
+
+<p>
+  <strong>Bus Code:</strong>
+  <%= @trip.bus.bus_code %>
+</p>
+
+<p>
+  <strong>Departure:</strong>
+  <%= @trip.departure.name %>
+</p>
+
+<p>
+  <strong>Arrival:</strong>
+  <%= @trip.arrival.name %>
+</p>
+
+<p>
+  <strong>Departure Date:</strong>
+  <%= day_and_time(@trip) %>
+</p>
+
+<p>
+  <strong>Seat Price:</strong>
+  <%= price(@trip) %>
+</p>
+
+<p>
+  <strong>Allow Extra Luggage? (for an extra fee!):</strong>
+  <%= permit_extra_luggage(@trip) %>
+</p>
+
+<br />
+
+<h2>Passenger Information</h2>
+<%= form_for @booking do |f| %>
+<% if @booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@booking.errors.count, "error") %> prohibited this credit_card from being saved:</h2>
+
+      <ul>
+        <% @booking.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= f.hidden_field :trip_id, value: @trip.id %>
+  <%= f.fields_for :passenger, @booking.build_passenger do |passenger_field| %>
+    <%= passenger_field.hidden_field :user_id, value: current_user.id %>
+    
+    <div class="field">
+      <%= passenger_field.label :name %>
+      <%= passenger_field.text_field :name %>
+    </div>
+
+    <div class="field">
+      <%= passenger_field.label :id_number %>
+      <%= passenger_field.text_field :id_number %>
+    </div>
+  <% end %>
+    <% if @trip.extra_luggage? %>
+      <div class="field">
+        <%= f.label :extra_luggage %>
+        <%= f.select :extra_luggage, [['Yes, add for +$5.00', true], ['No', false]] %>
+      </div>
+    <% end %>
+  <%= f.submit 'Go to Payment'  %>
+<% end %>
+
+<br />

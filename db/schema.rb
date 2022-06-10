@@ -15,7 +15,9 @@ ActiveRecord::Schema.define(version: 2022_06_10_074524) do
   create_table "bookings", force: :cascade do |t|
     t.integer "passenger_id", null: false
     t.integer "trip_id", null: false
-    t.integer "status"
+    t.integer "status", default: 0
+    t.boolean "extra_luggage", default: false
+    t.boolean "boolean", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
