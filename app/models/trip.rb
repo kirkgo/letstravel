@@ -5,6 +5,8 @@ class Trip < ApplicationRecord
   belongs_to :departure, class_name: 'City'
   belongs_to :arrival, class_name: 'City'
 
+  has_many :bookings
+
   validates :departure_id, presence: true
   validates :arrival_id, presence: true
   validates :departure_date, presence: true
