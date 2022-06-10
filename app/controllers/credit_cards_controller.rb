@@ -21,50 +21,36 @@ class CreditCardsController < ApplicationController
 
   # POST /credit_cards or /credit_cards.json
   def create
-    @credit_card = current_user.credit_cards.build(credit_card_params)
-
-    respond_to do |format|
-      if @credit_card.save
-        format.html { redirect_to credit_card_url(current_user, @credit_card), notice: "Credit card was successfully created." }
-        format.json { render :show, status: :created, location: @credit_card }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @credit_card.errors, status: :unprocessable_entity }
-      end
+    @credit_card = CreditCard.new(credit_card_params)
+    if @credit_card.save
+      redirect_to credit_cards_path
+    else
+      render :new
     end
   end
 
   # PATCH/PUT /credit_cards/1 or /credit_cards/1.json
   def update
-    respond_to do |format|
-      if @credit_card.update(credit_card_params)
-        format.html { redirect_to credit_card_url(current_user, @credit_card), notice: "Credit card was successfully updated." }
-        format.json { render :show, status: :ok, location: @credit_card }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @credit_card.errors, status: :unprocessable_entity }
-      end
+    if @credit_card.update(credit_card_params)
+      redirect_to credit_card_url(@credit_card), notice: "Credit card was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /credit_cards/1 or /credit_cards/1.json
   def destroy
     @credit_card.destroy
-
-    respond_to do |format|
-      format.html { redirect_to credit_cards_url, notice: "Credit card was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to credit_cards_url, notice: "Credit card was successfully destroyed."
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_credit_card
-      @credit_card = CreditCard.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def credit_card_params
-      params.require(:credit_card).permit(:user_id, :cardholder, :number, :expire_date, :cvv)
-    end
+  def set_credit_card
+    @credit_card = CreditCard.find(params[:id])
+  end
+
+  def credit_card_params
+    params.require(:credit_card).permit(:user_id, :cardholder, :number, :expire_date, :cvv)
+  end
 end

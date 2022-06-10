@@ -1,0 +1,22 @@
+<h1>New Booking</h1>
+<p>Please, confirm your booking info below.</p>
+
+<p>
+  <strong>Bus Code:</strong>
+  <%= @booking.trip.bus.bus_code %>
+</p>
+
+<p>
+  <strong>Departure:</strong>
+  <%= @booking.trip.departure.name %>
+</p>
+
+<p>
+  <strong>Arrival:</strong>
+  <%= @booking.trip.arrival.name %>
+</p>
+
+<p>
+  <strong>Departure Date:</strong>
+  <%= day_and_time(@booking.trip) %>
+</p>

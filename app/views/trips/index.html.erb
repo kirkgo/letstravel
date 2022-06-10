@@ -25,7 +25,7 @@
       <td><%= trip.departure.name %></td>
       <td><%= trip.arrival.name %></td>
       <td><%= day_and_time(trip) %></td>
-      <td><%= trip.bus.seats %></td>
+      <td><%= trip.available_seats %></td>
       <td><%= permit_extra_luggage(trip) %></td>
       <td><%= price(trip) %></td>
       <td><%= link_to 'Book It!', new_booking_path(trip_id: trip.id) %></td>

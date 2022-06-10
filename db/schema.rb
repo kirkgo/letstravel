@@ -10,14 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_10_083545) do
+ActiveRecord::Schema.define(version: 2022_06_10_110707) do
 
   create_table "bookings", force: :cascade do |t|
     t.integer "passenger_id", null: false
     t.integer "trip_id", null: false
     t.integer "status", default: 0
     t.boolean "extra_luggage", default: false
-    t.boolean "boolean", default: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["passenger_id"], name: "index_bookings_on_passenger_id"
@@ -60,6 +59,17 @@ ActiveRecord::Schema.define(version: 2022_06_10_083545) do
     t.index ["user_id"], name: "index_passengers_on_user_id"
   end
 
+  create_table "tickets", force: :cascade do |t|
+    t.string "code"
+    t.integer "booking_id", null: false
+    t.integer "status", default: 0
+    t.decimal "price", precision: 5, scale: 2
+    t.boolean "extra_luggage", default: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_tickets_on_booking_id"
+  end
+
   create_table "trips", force: :cascade do |t|
     t.integer "bus_id", null: false
     t.integer "departure_id", null: false
@@ -67,6 +77,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_083545) do
     t.datetime "departure_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "booked_seats", default: 0
     t.index ["arrival_id"], name: "index_trips_on_arrival_id"
     t.index ["bus_id"], name: "index_trips_on_bus_id"
     t.index ["departure_id"], name: "index_trips_on_departure_id"
@@ -88,6 +99,7 @@ ActiveRecord::Schema.define(version: 2022_06_10_083545) do
   add_foreign_key "bookings", "trips"
   add_foreign_key "credit_cards", "users"
   add_foreign_key "passengers", "users"
+  add_foreign_key "tickets", "bookings"
   add_foreign_key "trips", "buses"
   add_foreign_key "trips", "cities", column: "arrival_id"
   add_foreign_key "trips", "cities", column: "departure_id"

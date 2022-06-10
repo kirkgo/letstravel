@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tickets' => 'tickets#index'
+  get 'checkout' => "bookings#checkout"
   resources :credit_cards
   resources :bookings
   resources :passengers

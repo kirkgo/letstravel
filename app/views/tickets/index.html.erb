@@ -1,0 +1,58 @@
+<h1>Passenger Info</h1>
+
+<p>
+  <strong>Name:</strong>
+  <%= @passenger.name %>
+</p>
+
+<p>
+  <strong>ID Number:</strong>
+  <%= @passenger.id_number %>
+</p>
+
+<h2>Booking Info</h2>
+
+<% @bookings.each do |booking| %>
+  <p>
+    <strong>Booking ID: </strong>
+    <%= booking.id %>
+  </p>
+  <p>
+    <strong>Booking Status: </strong>
+    <%= booking.status %>
+  </p>
+
+  <% booking.tickets.each do |ticket| %>
+    <h2>Ticket Info</h2>
+    <p>
+      <strong>Ticket Code: </strong>
+      <%= ticket.code %>
+    </p>
+    <p>
+      <strong>Bus Code: </strong>
+      <%= ticket.booking.trip.bus.bus_code %>
+    </p>
+    <p>
+      <strong>Departure: </strong>
+      <%= ticket.booking.trip.departure.name %>
+    </p>
+    <p>
+      <strong>Arrival: </strong>
+      <%= ticket.booking.trip.arrival.name %>
+    </p>
+    <p>
+      <strong>Departure Date: </strong>
+      <%= day_and_time(ticket.booking.trip) %>
+    </p>
+    <p>
+      <strong>Extra Luggage (+$7.00): </strong>
+      <%= permit_extra_luggage(ticket.booking) %>
+    </p>
+    <p>
+      <strong>Total Cost: </strong>
+      <%= number_to_currency(ticket.booking.total_cost, precision: 2) %>
+    </p>
+  <% end %>
+<% end %>
+
+<%= link_to 'Back to Passengers', passengers_path %>

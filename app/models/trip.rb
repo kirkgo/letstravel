@@ -11,6 +11,7 @@ class Trip < ApplicationRecord
   validates :arrival_id, presence: true
   validates :departure_date, presence: true
   validates :bus_id, uniqueness: { scope: [ :arrival_id, :departure_date ] }
+  validates :booked_seats, presence: true
   validate  :different_cities
 
   scope :filter_by_departure, -> (departure) { where departure: departure }
@@ -23,6 +24,16 @@ class Trip < ApplicationRecord
 
   def extra_luggage?
     self.bus.extra_luggage?
+  end
+
+  def available_seats
+    self.bus.seats - self.booked_seats
+  end
+
+  def self.update_booked_seats(trip)
+    trip = Trip.find(trip)
+    trip.booked_seats += 1
+    trip.save
   end
 
   private

@@ -33,7 +33,32 @@
 
 <br />
 
-<h2>Passenger Information</h2>
+<h1>Payment Info</h1>
+<p>We will make the payment using the credit card below: </p>
+
+<p>
+  <strong>Card Holder:</strong>
+  <%= current_user.credit_cards.first.cardholder %>
+</p>
+
+<p>
+  <strong>Credit Card Number:</strong>
+  <%= current_user.credit_cards.first.number %>
+</p>
+
+<p>
+  <strong>Expire Date:</strong>
+  <%= current_user.credit_cards.first.expire_date %>
+</p>
+
+<p>
+  <strong>CVV</strong>
+  <%= current_user.credit_cards.first.cvv %>
+</p>
+
+<br />
+
+<h2>Add Passenger Information</h2>
 <%= form_for @booking do |f| %>
 <% if @booking.errors.any? %>
     <div id="error_explanation">
@@ -63,10 +88,10 @@
     <% if @trip.extra_luggage? %>
       <div class="field">
         <%= f.label :extra_luggage %>
-        <%= f.select :extra_luggage, [['Yes, add for +$5.00', true], ['No', false]] %>
+        <%= f.select :extra_luggage, [['Yes, add for +$7.00', true], ['No', false]] %>
       </div>
     <% end %>
-  <%= f.submit 'Go to Payment'  %>
+  <%= f.submit 'Make Payment'  %>
 <% end %>
 
 <br />
