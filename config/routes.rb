@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'tickets' => 'tickets#index'
-  get 'checkout' => "bookings#checkout"
+  get 'refund'  => 'tickets#refund'
   resources :credit_cards
   resources :bookings
   resources :passengers
@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   devise_for :users
   resources :buses
   resources :trips, only: :index
-  root "trips#index"
+  root 'trips#index'
 end

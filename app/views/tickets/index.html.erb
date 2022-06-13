@@ -45,14 +45,26 @@
       <%= day_and_time(ticket.booking.trip) %>
     </p>
     <p>
+      <strong>Status: </strong>
+      <%= ticket.status %>
+    </p>
+    
+    <h2>Ticket Cost</h2>
+    <p>
+      <strong>Seat Cost:</strong>
+      <%= price(ticket.booking.trip) %>
+    </p>
+    <p>
       <strong>Extra Luggage (+$7.00): </strong>
       <%= permit_extra_luggage(ticket.booking) %>
     </p>
     <p>
       <strong>Total Cost: </strong>
-      <%= number_to_currency(ticket.booking.total_cost, precision: 2) %>
+      <%= price(ticket.booking) %>
     </p>
+
+    <%= link_to 'Refund Ticket', refund_path(ticket_id: ticket.id) %>
   <% end %>
 <% end %>
-
+<br />
 <%= link_to 'Back to Passengers', passengers_path %>

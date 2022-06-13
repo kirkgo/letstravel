@@ -28,7 +28,6 @@ ActiveRecord::Schema.define(version: 2022_06_10_110707) do
     t.boolean "extra_luggage", default: false
     t.integer "seats"
     t.decimal "seat_price", precision: 5, scale: 2
-    t.decimal "decimal", precision: 5, scale: 2
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

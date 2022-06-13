@@ -36,6 +36,11 @@ class Trip < ApplicationRecord
     trip.save
   end
 
+  def revert_booked_seat
+    self.booked_seats -= 1
+    self.save
+  end
+
   private
 
   def different_cities
